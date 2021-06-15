@@ -8,7 +8,7 @@ class Cloud9Stack(core.Stack):
     repo_existing = codecommit.Repository.from_repository_name(self, "RepoExisting", "sic-020210618-pipeline")
     c9env = cloud9.Ec2Environment(self, "sic020210618-ec2", vpc=vpc,
         cloned_repositories=[
-            cloud9.CloneRepository.from_code_commit(repo_existing, "/src/sic-020210618-pipeline")
+            cloud9.CloneRepository.from_code_commit(repo_existing, "/git/sic-020210618-pipeline")
         ])
 
     core.CfnOutput(self, "URL", value=c9env.ide_url)
