@@ -4,8 +4,8 @@ CODECOMMIT_REPO_NAME = "sic-020210618-pipeline"
 
 from aws_cdk import core
 
-from pipeline.pipeline_stack import PipelineStack
-from pipeline.lambda_stack import LambdaStack
+from sic_020210618_pipeline.pipeline_stack import PipelineStack
+from sic_020210618_pipeline.lambda_stack import LambdaStack
 
 app = core.App()
 
