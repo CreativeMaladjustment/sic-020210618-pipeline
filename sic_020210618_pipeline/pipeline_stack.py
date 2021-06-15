@@ -85,7 +85,7 @@ class PipelineStack(core.Stack):
                             action_name="Lambda_CFN_Deploy",
                             template_path=cdk_build_output.at_path(
                                 "LambdaStack.template.json"),
-                            stack_name="LambdaDeploymentStack",
+                            stack_name="Lambda-sic020210618",
                             admin_permissions=True,
                             parameter_overrides=dict(
                                 lambda_code.assign(
@@ -97,7 +97,7 @@ class PipelineStack(core.Stack):
                             action_name="Cloud9_CFN_Deploy",
                             template_path=cdk_build_output.at_path(
                                 "sic020210618Cloud9.template.json"),
-                            stack_name="Cloud9DeploymentStack",
+                            stack_name="Cloud9-sic020210618",
                             admin_permissions=True)
                             ])
                 ]
