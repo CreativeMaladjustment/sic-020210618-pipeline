@@ -20,17 +20,17 @@ installcdk: ## onetime thing (also use npm to update cdk)
 # this assumes something like "sudo yum install nodejs npm" has been run
 
 deploypipeline: ## use cdk to deploy code commit, this creates infra
-	cdk deploy sic020210618-Pipeline
+	cdk deploy sic020210618-pipeline
 #	cdk deploy sic020210618-Pipeline --profile mfa
 
 destroypipeline: ## destroy the stack, this removes infra
-	cdk destroy sic020210618-Pipeline
+	cdk destroy sic020210618-pipeline
 
 diffpipeline: ## show the differences between IaC and the existing stack
-	cdk diff sic020210618-Pipeline
+	cdk diff sic020210618-pipeline
 
 synthpipeline: ## output yaml for review of the cfn template
-	cdk synth sic020210618-Pipeline
+	cdk synth sic020210618-pipeline
 
 ### onetime executions for new environments
 createenvs: ## make the venv 
