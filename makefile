@@ -19,18 +19,29 @@ installcdk: ## onetime thing (also use npm to update cdk)
 	pip install aws_cdk.aws_codecommit aws_cdk.aws_cloud9 aws_cdk.aws_codecommit
 # this assumes something like "sudo yum install nodejs npm" has been run
 
-# deploycodecommit: ## use cdk to deploy code commit
-#         cdk deploy sic-020210618-codecommit-stack --profile temp
+deploypipeline: ## use cdk to deploy code commit, this creates infra
+	cdk deploy sic020210618-Pipeline
+#	cdk deploy sic020210618-Pipeline --profile mfa
+
+destroypipeline: ## destroy the stack, this removes infra
+	cdk destroy sic020210618-Pipeline
+
+diffpipeline: ## show the differences between IaC and the existing stack
+	cdk diff sic020210618-Pipeline
+
+synthpipeline: ## output yaml for review of the cfn template
+	cdk synth sic020210618-Pipeline
 
 ### onetime executions for new environments
-# createenvs: ## make the venv 
-# 	python3 -m venv $(ENVSPATH)
+createenvs: ## make the venv 
+	python3 -m venv $(ENVSPATH)
 
+gitconfig: ## set username and such
+	git config --global user.name "jason.davis"
+	git config --global user.email "jason.davis@stelligent.com"
+	
+### execution for new cdk project
 # cdkinit: ## setup inital cdk application only needs to be run once
 #         cdk init --language python
 # this also has to be done in an empty directory so move this make file up a dir and 
 # make -f ../makefile cdkinit # or something
-
-# gitconfig: ## set username and such
-# 	git config --global user.name "jason.davis"
-# 	git config --global user.email "jason.davis@stelligent.com"
