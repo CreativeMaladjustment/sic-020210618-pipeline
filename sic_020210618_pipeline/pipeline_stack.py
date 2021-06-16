@@ -94,13 +94,13 @@ class PipelineStack(core.Stack):
                                     object_key=lambda_location.object_key,
                                     object_version=lambda_location.object_version)),
                             extra_inputs=[lambda_build_output])
-                        #     ,
-                        # codepipeline_actions.CloudFormationCreateUpdateStackAction(
-                        #     action_name="Cloud9_CFN_Deploy",
-                        #     template_path=cdk_build_output.at_path(
-                        #         "sic020210618-cloud9-pipeline.template.json"),
-                        #     stack_name="Cloud9-sic020210618",
-                        #     admin_permissions=True)
+                            ,
+                        codepipeline_actions.CloudFormationCreateUpdateStackAction(
+                            action_name="Cloud9_CFN_Deploy",
+                            template_path=cdk_build_output.at_path(
+                                "sic020210618-cloud9-pipeline.template.json"),
+                            stack_name="Cloud9-sic020210618-pipeline",
+                            admin_permissions=True)
                             ])
                 ]
             )
