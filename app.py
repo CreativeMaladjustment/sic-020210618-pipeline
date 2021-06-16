@@ -19,13 +19,13 @@ standard_tags["project"]="sic020210618"
         
 app = core.App()
 
-lambda_stack = LambdaStack(app, "sic020210618-Lambda")
+lambda_stack = LambdaStack(app, "sic020210618-Lambda-pipeline")
 tag_stack(lambda_stack, standard_tags)
 
 cloud9_stack = LambdaStack(app, "sic020210618-cloud9-pipeline")
 tag_stack(cloud9_stack, standard_tags)
 
-pipeline_stack = PipelineStack(app, "sic020210618-Pipeline", lambda_code=lambda_stack.lambda_code, repo_name=CODECOMMIT_REPO_NAME)
+pipeline_stack = PipelineStack(app, "sic020210618-pipeline", lambda_code=lambda_stack.lambda_code, repo_name=CODECOMMIT_REPO_NAME)
 tag_stack(pipeline_stack, standard_tags)
 
 app.synth()
