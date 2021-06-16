@@ -99,7 +99,7 @@ class PipelineStack(core.Stack):
                             action_name="Cloud9_CFN_Deploy",
                             template_path=cdk_build_output.at_path(
                                 "sic020210618-cloud9-pipeline.template.json"),
-                            stack_name="Cloud9-sic020210618-pipeline",
+                            stack_name="sic020210618-cloud9-pipeline",
                             admin_permissions=True)
                             ])
                 ]
