@@ -1,0 +1,1 @@
+aws cloudformation create-stack --template-body file://./vpc-for-cloud9-privatesubnetpoc.yml --stack-name vpcforcloud9pocprivatesubnet --region us-east-1

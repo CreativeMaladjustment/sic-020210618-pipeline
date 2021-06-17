@@ -1,4 +1,4 @@
-AWSTemplateFormatVersion: 2010-09-09
+    AWSTemplateFormatVersion: 2010-09-09
     Description: Deploy a VPC with a single private subnet and ssm endpoints
     Parameters:
       Sid:
