@@ -45,3 +45,13 @@ gitconfig: ## set username and such
 #         cdk init --language python
 # this also has to be done in an empty directory so move this make file up a dir and 
 # make -f ../makefile cdkinit # or something
+
+### feature_001 example
+
+mergeF001: ## git commands to merge in feature001 to main causing code pipeline to run
+    git merge feature-001
+
+destroyF001: ## destroy the stack, this removes infra created by the pipeline
+    cdk destroy sic020210618-feature001-pipeline
+
+rmF001: ## remove feature-001 ?
