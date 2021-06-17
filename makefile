@@ -49,9 +49,9 @@ gitconfig: ## set username and such
 ### feature_001 example
 
 mergeF001: ## git commands to merge in feature001 to main causing code pipeline to run
-    git merge feature-001
+	git merge feature-001
 
 destroyF001: ## destroy the stack, this removes infra created by the pipeline
-    cdk destroy sic020210618-feature001-pipeline
+	cdk destroy sic020210618-feature001-pipeline
 
 rmF001: ## remove feature-001 ?
