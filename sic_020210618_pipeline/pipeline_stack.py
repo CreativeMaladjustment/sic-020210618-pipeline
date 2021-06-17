@@ -29,7 +29,7 @@ class PipelineStack(core.Stack):
                             artifacts={
                                 "base-directory": "dist",
                                 "files": [
-                                    "sic020210618-Lambda-pipeline.template.json","sic020210618-cloud9-pipeline.template.json"]},
+                                    "sic020210618-Lambda-pipeline.template.json","sic020210618-cloud9-pipeline.template.json","sic020210618-feature001-pipeline.template.json"]},
                             environment=dict(buildImage=
                                 codebuild.LinuxBuildImage.STANDARD_2_0))))
 
@@ -100,6 +100,13 @@ class PipelineStack(core.Stack):
                             template_path=cdk_build_output.at_path(
                                 "sic020210618-cloud9-pipeline.template.json"),
                             stack_name="sic020210618-cloud9-pipeline",
+                            admin_permissions=True)
+                            ,
+                        codepipeline_actions.CloudFormationCreateUpdateStackAction(
+                            action_name="Feature001_CFN_Deploy",
+                            template_path=cdk_build_output.at_path(
+                                "sic020210618-feature001-pipeline.template.json"),
+                            stack_name="sic020210618-feature001-pipeline",
                             admin_permissions=True)
                             ])
                 ]
