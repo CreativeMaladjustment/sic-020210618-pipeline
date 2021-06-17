@@ -8,6 +8,7 @@ from aws_cdk.core import Stack, Tags
 from sic_020210618_pipeline.pipeline_stack import PipelineStack
 from sic_020210618_pipeline.lambda_stack import LambdaStack
 from sic_020210618_pipeline.cloud9_stack import Cloud9Stack
+from sic_020210618_pipeline.ssmparams_001_stack import Feature001Stack
 
 def tag_stack(stack: Stack, tags: dict):
     for key, value in tags.items():
@@ -24,6 +25,9 @@ tag_stack(lambda_stack, standard_tags)
 
 cloud9_stack = Cloud9Stack(app, "sic020210618-cloud9-pipeline")
 tag_stack(cloud9_stack, standard_tags)
+
+feature001_stack = Feature001Stack(app, "sic020210618-feature001-pipeline")
+tag_stack(feature001_stack, standard_tags)
 
 pipeline_stack = PipelineStack(app, "sic020210618-pipeline", lambda_code=lambda_stack.lambda_code, repo_name=CODECOMMIT_REPO_NAME)
 tag_stack(pipeline_stack, standard_tags)

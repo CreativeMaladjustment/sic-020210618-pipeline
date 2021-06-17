@@ -16,7 +16,7 @@ freezeenvs: ## update the requirements.txt file and remove pkg-resources if in a
 
 installcdk: ## onetime thing (also use npm to update cdk)
 	sudo npm install -g aws-cdk;
-	pip install aws_cdk.aws_codecommit aws_cdk.aws_cloud9 aws_cdk.aws_codecommit
+	pip install aws_cdk.aws_codecommit aws_cdk.aws_cloud9 aws_cdk.aws_codecommit aws_cdk.aws_ssm
 # this assumes something like "sudo yum install nodejs npm" has been run
 
 deploypipeline: ## use cdk to deploy code commit, this creates infra
