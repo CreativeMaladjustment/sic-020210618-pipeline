@@ -6,6 +6,6 @@ class Feature001Stack(core.Stack):
 
     param = ssm.StringParameter(stack, "sic_020210618_pipeline_feature001_ssm001",
         description="feature 001 requires this ssm param to be set",
-        parameter_name="sic_020210618_pipeline/feature001_001"
+        parameter_name="sic_020210618_pipeline/feature001_001",
         string_value="rabbit"
     )
