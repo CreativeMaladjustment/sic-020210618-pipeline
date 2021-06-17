@@ -108,6 +108,12 @@ class PipelineStack(core.Stack):
                                 "sic020210618-feature001-pipeline.template.json"),
                             stack_name="sic020210618-feature001-pipeline",
                             admin_permissions=True)
-                            ])
+                            ,
+                        codepipeline_actions.CloudFormationCreateUpdateStackAction(
+                            action_name="vpcforcloud9_CFN_Deploy",
+                            template_path="/cloudformationtemplates/vpc-for-cloud9-privatesubnetpoc.yml",
+                            stack_name="sic020210618-vpcforcloud9-pipeline",
+                            admin_permissions=True)
+                    ])
                 ]
             )
