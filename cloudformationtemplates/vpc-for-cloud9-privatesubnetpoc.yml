@@ -1,0 +1,100 @@
+AWSTemplateFormatVersion: 2010-09-09
+    Description: Deploy a VPC with a single private subnet and ssm endpoints
+    Parameters:
+      Sid:
+        Description: 'Unique id/name for appending to this stacks resources'
+        Type: String
+        Default: 'VPCWithPrivateSubnetAndSSMEndpoint'
+      RegionParameter:
+        Type: String
+        Default: us-east-1
+        Description: Enter region eg eu-west-1 or ap-southeast-1
+    Resources:
+      VPC:
+        Type: AWS::EC2::VPC
+        Properties:
+          CidrBlock: 10.0.0.0/16
+          EnableDnsHostnames: true
+          Tags:
+          - Key: Name
+            Value: !Sub 'VPC ${Sid}'
+      PrivateSubnet:
+        Type: AWS::EC2::Subnet
+        Properties:
+          VpcId: !Ref VPC
+          CidrBlock: 10.0.0.0/24
+          AvailabilityZone: !Select
+            - '0'
+            - !GetAZs ''
+          Tags:
+            - Key: Name
+              Value: !Sub 'Private Subnet ${Sid}'
+      PrivateRouteTable:
+        Type: AWS::EC2::RouteTable
+        Properties:
+          VpcId: !Ref VPC
+          Tags:
+          - Key: Name
+            Value: !Sub 'Private Route Table ${Sid}'
+      PrivateSubnetRouteTableAssociation:
+        Type: AWS::EC2::SubnetRouteTableAssociation
+        Properties:
+          SubnetId: !Ref PrivateSubnet
+          RouteTableId: !Ref PrivateRouteTable
+      SecurityGroup:
+        Type: AWS::EC2::SecurityGroup
+        Properties:
+          GroupName: "Internet Group"
+          GroupDescription: "No Ingress/Egress"
+          Tags:
+          - Key: Name
+            Value: !Sub 'Security Group ${Sid}'
+          SecurityGroupIngress:
+          - IpProtocol: tcp
+            FromPort: 443
+            ToPort: 443
+            CidrIp: 10.0.0.0/24
+          VpcId: !Ref VPC
+      SSMEndPoint:
+        Type: AWS::EC2::VPCEndpoint
+        Properties:
+          PrivateDnsEnabled: true
+          SecurityGroupIds:
+            - !Ref SecurityGroup
+          SubnetIds:
+            - !Ref PrivateSubnet
+          VpcEndpointType: "Interface"
+          ServiceName: !Sub com.amazonaws.${RegionParameter}.ssm
+          VpcId: !Ref VPC
+
+      EC2MessagesEndPoint:
+        Type: AWS::EC2::VPCEndpoint
+        Properties:
+          PrivateDnsEnabled: true
+          SecurityGroupIds:
+            - !Ref SecurityGroup
+          SubnetIds:
+            - !Ref PrivateSubnet
+          VpcEndpointType: "Interface"
+          ServiceName: !Sub com.amazonaws.${RegionParameter}.ec2messages
+          VpcId: !Ref VPC
+      SSMMessagesEndPoint:
+        Type: AWS::EC2::VPCEndpoint
+        Properties:
+          PrivateDnsEnabled: true
+          SecurityGroupIds:
+            - !Ref SecurityGroup
+          SubnetIds:
+            - !Ref PrivateSubnet
+          VpcEndpointType: "Interface"
+          ServiceName: !Sub com.amazonaws.${RegionParameter}.ssmmessages
+          VpcId: !Ref VPC
+
+
+    Outputs:
+      VPC:
+        Description: VPC
+        Value: !Ref VPC
+      PrivateSubnet:
+        Description: Subnet
+        Value: !Ref PrivateSubnet
